@@ -15,7 +15,6 @@ public abstract class AbstractController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +40,5 @@ public abstract class AbstractController extends HttpServlet {
     }
 
     abstract protected void performTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-
-
 
 }

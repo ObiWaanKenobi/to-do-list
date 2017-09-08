@@ -54,6 +54,7 @@ function moveTask(moveType) {
     }
 }
 
+//set active to the chosen taskType
 $(document).ready(function(){
     function setActive(taskType){
         document.querySelector(`#taskTypeSwitcher button[value='${taskType}']`).classList.add('active')

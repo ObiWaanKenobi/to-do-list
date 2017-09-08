@@ -11,25 +11,27 @@ import java.sql.SQLException;
 import static by.gsu.epamlab.model.constants.Constants.*;
 import static by.gsu.epamlab.model.constants.SQLConstants.*;
 
-public class DBUserDAO implements IUserDAO {
+public class MySQLUserDAO implements IUserDAO {
 
-    //global todo
     private Connection connection = null;
 
-    public DBUserDAO() {
+    public MySQLUserDAO() {
     }
 
-    public DBUserDAO(Connection connection) throws SQLException {
+    public MySQLUserDAO(Connection connection) throws SQLException {
         this.connection = connection;
         connection.setAutoCommit(false);
     }
 
     @Override
-    public void endTransaction() throws SQLException {
-        connection.commit();
+    public void endTransaction() throws UserDaoException {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            throw new UserDaoException();
+        }
     }
 
-    //todo userDaoExc
     @Override
     public User getUser(String login, String password) throws UserDaoException {
         User user;
@@ -49,7 +51,7 @@ public class DBUserDAO implements IUserDAO {
         return user;
     }
 
-    //todo userDaoExc
+
     @Override
     public User addUser(String login, String password) throws UserDaoException {
         User user;
@@ -74,7 +76,7 @@ public class DBUserDAO implements IUserDAO {
         ResultSet resultSet;
         try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
             preparedStatement.setString(LOGIN_IND, login);
-            synchronized (DBUserDAO.class) {
+            synchronized (MySQLUserDAO.class) {
                 resultSet = preparedStatement.executeQuery();
             }
             if (resultSet.next()) {
@@ -90,7 +92,7 @@ public class DBUserDAO implements IUserDAO {
         try(PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_INTO_USERS)) {
             preparedStatement.setString(LOGIN_IND, user.getLogin());
             preparedStatement.setString(PASSWORD_IND, user.getPassword());
-            synchronized (DBUserDAO.class) {
+            synchronized (MySQLUserDAO.class) {
                 preparedStatement.executeUpdate();
             }
         }

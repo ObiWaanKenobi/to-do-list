@@ -2,7 +2,7 @@ package by.gsu.epamlab.controller.impls;
 
 import by.gsu.epamlab.controller.ifaces.AbstractController;
 import by.gsu.epamlab.model.beans.Task;
-import by.gsu.epamlab.model.services.ITaskService;
+import by.gsu.epamlab.model.services.taskservice.ITaskService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;

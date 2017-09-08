@@ -2,7 +2,7 @@ package by.gsu.epamlab.controller.impls;
 
 import by.gsu.epamlab.controller.ifaces.AbstractController;
 import by.gsu.epamlab.model.exceptions.TaskDaoException;
-import by.gsu.epamlab.model.services.ITaskService;
+import by.gsu.epamlab.model.services.taskservice.ITaskService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class MoveTaskController extends AbstractController {
     @Override
     protected void performTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String moveType = request.getParameter(MOVE_TYPE);
-        String[] checkedTasks = request.getParameterValues(CHECKED_TASKS);
+        String[] checkedTasks = request.getParameterValues(CHECKED_TASK);
 
         ITaskService iTaskService = (ITaskService) getServletContext().getAttribute(ITASK_SERVICE);
 

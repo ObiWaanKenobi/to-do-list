@@ -1,4 +1,4 @@
-package by.gsu.epamlab.model.services;
+package by.gsu.epamlab.model.services.taskservice;
 
 import by.gsu.epamlab.model.beans.Task;
 import by.gsu.epamlab.model.exceptions.TaskDaoException;

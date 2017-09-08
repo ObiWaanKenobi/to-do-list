@@ -3,7 +3,7 @@ package by.gsu.epamlab.controller.impls;
 import by.gsu.epamlab.controller.ifaces.AbstractController;
 import by.gsu.epamlab.model.beans.Task;
 import by.gsu.epamlab.model.exceptions.TaskDaoException;
-import by.gsu.epamlab.model.services.ITaskService;
+import by.gsu.epamlab.model.services.taskservice.ITaskService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

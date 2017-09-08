@@ -65,9 +65,7 @@
                                                 </label>
                                             </div>
                                             <div class="col">
-                                                <button class="btn btn-secondary" name="taskId" value="${task.taskId}">
-                                                    Upload File
-                                                </button>
+                                                <button class="btn btn-secondary" name="taskId" value="${task.taskId}">Upload File</button>
                                             </div>
                                         </div>
                                     </form>

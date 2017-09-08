@@ -13,26 +13,30 @@ import java.util.List;
 import static by.gsu.epamlab.model.constants.Constants.*;
 import static by.gsu.epamlab.model.constants.SQLConstants.*;
 
-public class DBTaskDAO implements ITaskDAO {
+public class MySQLTaskDAO implements ITaskDAO {
 
     private Connection connection = null;
 
-    public DBTaskDAO() {
+    public MySQLTaskDAO() {
     }
 
-    public DBTaskDAO(Connection connection) throws SQLException {
+    public MySQLTaskDAO(Connection connection) throws SQLException {
         this.connection = connection;
         connection.setAutoCommit(false);
     }
 
     @Override
-    public void endTransaction() throws SQLException {
-        connection.commit();
+    public void endTransaction() throws TaskDaoException {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            throw new TaskDaoException();
+        }
     }
 
     //sqlexcept change
     @Override
-    public List<Task> getTasks(String taskType, String userId) throws TaskDaoException, SQLException {
+    public List<Task> getTasks(String taskType, String userId) throws TaskDaoException {
         List<Task> tasks = new ArrayList<>();
         ResultSet resultSet = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(TaskType.valueOf(taskType).getTaskQuery())) {
@@ -51,7 +55,7 @@ public class DBTaskDAO implements ITaskDAO {
         }
     }
 
-    //sqlexcept change
+
     @Override
     public Task addTask(String taskName, String taskDate, String userId) throws TaskDaoException {
         Task task = null;
@@ -61,7 +65,7 @@ public class DBTaskDAO implements ITaskDAO {
                 task = new Task();
                 throw new TaskDaoException(TASK_IS_EXIST);
             }
-            synchronized (DBTaskDAO.class) {
+            synchronized (MySQLTaskDAO.class) {
                 preparedStatement.setString(TASK_NAME_IND, taskName);
                 preparedStatement.setString(TASK_DATE_IND, taskDate);
                 preparedStatement.setString(TASK_USER_ID_IND, userId);
@@ -70,22 +74,22 @@ public class DBTaskDAO implements ITaskDAO {
             task = findTask(taskName, taskDate, userId);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new TaskDaoException();
         }
 
         return task;
     }
 
-    //sqlexcept change
+
     @Override
-    public void moveTask(String moveTaskType, String taskId) throws TaskDaoException, SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(MoveTaskType.valueOf(moveTaskType).getQuery())) {
-            synchronized (DBTaskDAO.class) {
+    public void moveTask(String moveTaskType, String taskId) throws TaskDaoException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(MoveTaskType.valueOf(moveTaskType).getQuery())){
+            synchronized (MySQLTaskDAO.class) {
                 preparedStatement.setString(TASKID_IND, taskId);
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new TaskDaoException();
         }
     }
 
@@ -108,28 +112,28 @@ public class DBTaskDAO implements ITaskDAO {
     }
 
     @Override
-    public void addTaskFile(String fileName, String taskId) {
+    public void addTaskFile(String fileName, String taskId) throws TaskDaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.ADD_FILE_TO_TASK)) {
-            synchronized (DBTaskDAO.class) {
+            synchronized (MySQLTaskDAO.class) {
                 preparedStatement.setString(1, fileName);
                 preparedStatement.setString(2, taskId);
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new TaskDaoException();
         }
 
     }
 
     @Override
-    public void deleteTaskFile(String taskId) {
+    public void deleteTaskFile(String taskId) throws TaskDaoException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.DELETE_FILE_FROM_TASK)) {
-            synchronized (DBTaskDAO.class) {
+            synchronized (MySQLTaskDAO.class) {
                 preparedStatement.setString(1, taskId);
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new TaskDaoException();
         }
 
     }

@@ -1,11 +1,10 @@
-package by.gsu.epamlab.model.factories;
+package by.gsu.epamlab.model.factories.service;
 
 import by.gsu.epamlab.model.dao.taskDAO.ITaskDAO;
-import by.gsu.epamlab.model.services.ITaskService;
-import by.gsu.epamlab.model.services.ITaskServiceImpl;
+import by.gsu.epamlab.model.services.taskservice.ITaskService;
+import by.gsu.epamlab.model.services.taskservice.ITaskServiceImpl;
 
 public class TaskServiceFactory {
-    //todo
     public static ITaskService getTaskService(ITaskDAO iTaskDAO){
         return new ITaskServiceImpl(iTaskDAO);
     }

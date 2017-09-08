@@ -2,10 +2,8 @@ package by.gsu.epamlab.controller.impls;
 
 import by.gsu.epamlab.controller.ifaces.AbstractController;
 import by.gsu.epamlab.model.beans.User;
-import by.gsu.epamlab.model.dao.userDAO.IUserDAO;
 import by.gsu.epamlab.model.exceptions.UserDaoException;
-import by.gsu.epamlab.model.factories.UserDAOFactory;
-import by.gsu.epamlab.model.services.IUserService;
+import by.gsu.epamlab.model.services.userservice.IUserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

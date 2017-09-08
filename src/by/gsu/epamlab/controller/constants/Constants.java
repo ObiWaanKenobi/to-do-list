@@ -15,7 +15,7 @@ public class Constants {
     public final static String TASK_DATE = "taskDate";
     public final static String TASK_TYPE = "taskType";
     public final static String MOVE_TYPE = "moveType";
-    public final static String CHECKED_TASKS = "checkedTasks";
+    public final static String CHECKED_TASK = "checkedTask";
     public final static String COMMAND = "command";
 
 
