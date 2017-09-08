@@ -1,7 +1,7 @@
 package by.gsu.epamlab.model.services.taskservice;
 
 import by.gsu.epamlab.model.beans.Task;
-import by.gsu.epamlab.model.dao.taskDAO.ITaskDAO;
+import by.gsu.epamlab.model.dao.taskdao.ITaskDAO;
 import by.gsu.epamlab.model.exceptions.TaskDaoException;
 
 import java.sql.SQLException;

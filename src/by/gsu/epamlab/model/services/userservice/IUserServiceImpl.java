@@ -1,7 +1,7 @@
 package by.gsu.epamlab.model.services.userservice;
 
 import by.gsu.epamlab.model.beans.User;
-import by.gsu.epamlab.model.dao.userDAO.IUserDAO;
+import by.gsu.epamlab.model.dao.userdao.IUserDAO;
 import by.gsu.epamlab.model.exceptions.UserDaoException;
 
 import java.sql.SQLException;

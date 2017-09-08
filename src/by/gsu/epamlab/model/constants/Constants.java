@@ -14,7 +14,7 @@ public class Constants {
     public final static String TASK_IS_EXIST = "This task is already exist!";
 
 
-    //taskDAO constants
+    //taskdao constants
     public final static int TASKID_IND = 1;
     public final static int DESCRIPTION_IND = 2;
     public final static int DATE_IND = 3;

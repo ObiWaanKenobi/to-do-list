@@ -1,9 +1,9 @@
 package by.gsu.epamlab.model.factories.dao;
 
-import by.gsu.epamlab.model.dao.taskDAO.MySQLTaskDAO;
-import by.gsu.epamlab.model.dao.taskDAO.ITaskDAO;
-import by.gsu.epamlab.model.dao.userDAO.MySQLUserDAO;
-import by.gsu.epamlab.model.dao.userDAO.IUserDAO;
+import by.gsu.epamlab.model.dao.taskdao.MySQLTaskDAO;
+import by.gsu.epamlab.model.dao.taskdao.ITaskDAO;
+import by.gsu.epamlab.model.dao.userdao.MySQLUserDAO;
+import by.gsu.epamlab.model.dao.userdao.IUserDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;

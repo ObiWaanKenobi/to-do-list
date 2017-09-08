@@ -1,4 +1,4 @@
-package by.gsu.epamlab.model.dao.userDAO;
+package by.gsu.epamlab.model.dao.userdao;
 
 import by.gsu.epamlab.model.beans.User;
 import by.gsu.epamlab.model.exceptions.UserDaoException;
