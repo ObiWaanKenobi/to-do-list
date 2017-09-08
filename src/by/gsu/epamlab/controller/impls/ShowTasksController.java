@@ -31,8 +31,6 @@ public class ShowTasksController extends AbstractController {
                 jumpForward(TASKS_PAGE, request, response);
             } catch (TaskDaoException e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
         //todo rework

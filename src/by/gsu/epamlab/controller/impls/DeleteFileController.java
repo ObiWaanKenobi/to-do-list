@@ -28,8 +28,6 @@ public class DeleteFileController extends AbstractController {
             request.getSession().setAttribute(TASKS, tasks);
         } catch (TaskDaoException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         response.sendRedirect("/jsp/tasks.jsp");
 

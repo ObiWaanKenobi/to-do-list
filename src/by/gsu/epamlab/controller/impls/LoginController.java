@@ -49,8 +49,6 @@ public class LoginController extends AbstractController {
             jumpRedirect(TASKS_PAGE, response);
         } catch (UserDaoException e) {
             jumpError(LOGIN_PAGE, e.getMessage(), request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

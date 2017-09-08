@@ -34,8 +34,6 @@ public class AddTaskController extends AbstractController {
             jumpRedirect(TASKS_PAGE, response);
         } catch (TaskDaoException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

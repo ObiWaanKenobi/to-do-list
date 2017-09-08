@@ -17,21 +17,21 @@ public class IUserServiceImpl implements IUserService {
     }
 
     @Override
-    public int getUserId(String login) throws UserDaoException, SQLException {
+    public int getUserId(String login) throws UserDaoException{
         int userId = iUserDAO.getUserId(login);
         iUserDAO.endTransaction();
         return userId;
     }
 
     @Override
-    public User getUser(String login, String password) throws UserDaoException, SQLException {
+    public User getUser(String login, String password) throws UserDaoException{
         User user = iUserDAO.getUser(login, password);
         iUserDAO.endTransaction();
         return user;
     }
 
     @Override
-    public User addUser(String login, String password) throws UserDaoException, SQLException {
+    public User addUser(String login, String password) throws UserDaoException{
         User user = iUserDAO.addUser(login, password);
         iUserDAO.endTransaction();
         return user;

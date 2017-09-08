@@ -19,7 +19,7 @@ public class ITaskServiceImpl implements ITaskService {
     }
 
     @Override
-    public void moveTask(String moveTaskType, String... tasksId) throws TaskDaoException, SQLException {
+    public void moveTask(String moveTaskType, String... tasksId) throws TaskDaoException{
         for (String taskId : tasksId) {
             iTaskDAO.moveTask(moveTaskType, taskId);
         }
@@ -27,27 +27,27 @@ public class ITaskServiceImpl implements ITaskService {
     }
 
     @Override
-    public List<Task> getTasks(String taskType, String userId) throws TaskDaoException, SQLException {
+    public List<Task> getTasks(String taskType, String userId) throws TaskDaoException{
         List<Task> tasks = iTaskDAO.getTasks(taskType, userId);
         iTaskDAO.endTransaction();
         return tasks;
     }
 
     @Override
-    public Task addTask(String taskName, String taskDate, String userId) throws TaskDaoException, SQLException {
+    public Task addTask(String taskName, String taskDate, String userId) throws TaskDaoException{
         Task task = iTaskDAO.addTask(taskName, taskDate, userId);
         iTaskDAO.endTransaction();
         return task;
     }
 
     @Override
-    public void addTaskFile(String fileName, String taskId) throws TaskDaoException, SQLException {
+    public void addTaskFile(String fileName, String taskId) throws TaskDaoException{
         iTaskDAO.addTaskFile(fileName, taskId);
         iTaskDAO.endTransaction();
     }
 
     @Override
-    public void deleteTaskFile(String taskId) throws TaskDaoException, SQLException {
+    public void deleteTaskFile(String taskId) throws TaskDaoException{
         iTaskDAO.deleteTaskFile(taskId);
         iTaskDAO.endTransaction();
     }

@@ -54,8 +54,6 @@ public class RegistrationController extends AbstractController {
             jumpRedirect(TASKS_PAGE, response);
         } catch (UserDaoException e) {
             jumpError(REGISTRATION_PAGE, e.getMessage(), request, response);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

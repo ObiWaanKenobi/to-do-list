@@ -26,8 +26,6 @@ public class MoveTaskController extends AbstractController {
             iTaskService.moveTask(moveType, checkedTasks);
         } catch (TaskDaoException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }
