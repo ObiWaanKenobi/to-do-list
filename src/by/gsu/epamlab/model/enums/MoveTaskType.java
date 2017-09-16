@@ -1,29 +1,29 @@
 package by.gsu.epamlab.model.enums;
 
+import by.gsu.epamlab.model.constants.SQLConstants;
+
 public enum MoveTaskType {
     MOVE_TO_BIN {
         @Override
         public String getQuery() {
-            return "UPDATE tasks SET isBinned = TRUE, isFixed = FALSE WHERE id = ?";
+            return SQLConstants.MOVE_TASK_TO_BIN;
         }
     },
     MOVE_TO_FIXED {
         @Override
         public String getQuery() {
-            return "UPDATE tasks SET isFixed = TRUE, isBinned = FALSE WHERE id = ?";
+            return SQLConstants.MOVE_TASK_TO_FIXED;
         }
     },
     RESTORE {
         @Override
         public String getQuery() {
-            return "UPDATE tasks SET isBinned = FALSE WHERE id = ?";
+            return SQLConstants.RESTORE_TASK;
         }
     },
-    DELETE {
+    RESTORE_FIXED {
         @Override
-        public String getQuery() {
-            return "DELETE FROM tasks WHERE id = ?";
-        }
+        public String getQuery() { return SQLConstants.RESTORE_FIXED_TASK; }
     };
 
     public abstract String getQuery();

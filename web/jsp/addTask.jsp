@@ -11,7 +11,7 @@
 
     <div class="row section-row">
         <div class="col-sm-4">
-            <form method="post" action="/addtask" onsubmit="setDate('${sessionScope.get('taskType')}')">
+            <form method="post" action="/addTask" onsubmit="setDate('${sessionScope.get('taskType')}')">
                 <input type="hidden" name="taskDate" id="taskDate">
                 <div class="form-group">
                     <label for="nameId">Enter task name:</label>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="rov section-row">
+    <div class="row section-row">
         <div class="col">
             <c:import url="footer.jsp"/>
         </div>

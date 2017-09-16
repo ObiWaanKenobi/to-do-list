@@ -2,7 +2,6 @@
   <artifact type="war" name="13.web project:war">
     <output-path>$PROJECT_DIR$/out/artifacts/13_web_project_war</output-path>
     <root id="archive" name="13.web project_war.war">
-      <element id="artifact" artifact-name="13.web project:war exploded" />
       <element id="dir-copy" path="$PROJECT_DIR$" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="lib">

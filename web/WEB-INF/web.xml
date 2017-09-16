@@ -6,99 +6,43 @@
 
     <listener>
         <listener-class>
-            by.gsu.epamlab.controller.listeners.CustomServletContextListener
+            by.gsu.epamlab.controller.listeners.ServiceContextListener
         </listener-class>
     </listener>
 
+    <listener>
+        <listener-class>
+            by.gsu.epamlab.controller.listeners.FileLocationContextListener
+        </listener-class>
+    </listener>
+
+
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file.dir</param-name>
+        <param-value>fileStorage</param-value>
+    </context-param>
+
+
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>by.gsu.epamlab.controller.filter.LoginFilter</filter-class>
+        <filter-class>by.gsu.epamlab.controller.filters.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/showtasks</url-pattern>
     </filter-mapping>
 
-    <context-param>
-        <description>Location to store uploaded file</description>
-        <param-name>file-upload</param-name>
-        <param-value>
-            C:\Program Files\apache-tomcat-8.5.16-windows-x64\apache-tomcat-8.5.16\webapps\data\
-        </param-value>
-    </context-param>
+    <session-config>
+        <session-timeout>5</session-timeout>
+    </session-config>
 
-    <servlet>
-        <servlet-name>LoginController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.LoginController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginController</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>RegistrationController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.RegistrationController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegistrationController</servlet-name>
-        <url-pattern>/registrate</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>LogoutController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.LogoutController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutController</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ShowTasksController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.ShowTasksController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ShowTasksController</servlet-name>
-        <url-pattern>/showtasks</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>MoveTaskController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.MoveTaskController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MoveTaskController</servlet-name>
-        <url-pattern>/movetask</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddTaskController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.AddTaskController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AddTaskController</servlet-name>
-        <url-pattern>/addtask</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>UploadFileController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.UploadFileController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UploadFileController</servlet-name>
-        <url-pattern>/uploadFile</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>DownloadFileController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.DownloadFileController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DownloadFileController</servlet-name>
-        <url-pattern>/downloadFile</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>DeleteFileController</servlet-name>
-        <servlet-class>by.gsu.epamlab.controller.impls.DeleteFileController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DeleteFileController</servlet-name>
-        <url-pattern>/deleteFile</url-pattern>
-    </servlet-mapping>
+
+    <!--wrong adress redirect-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/404.jsp</location>
+    </error-page>
 
 
 </web-app>

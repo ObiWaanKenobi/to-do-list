@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>To-Do List</title>
     <c:import url="headIncludes.jsp"/>
 </head>
 <body>
@@ -12,12 +12,13 @@
     <div class="row section-row">
         <div class="col">
             <c:import url="header.jsp"/>
+            <c:import url="error.jsp"/>
         </div>
     </div>
 
     <div class="row section-row">
         <div class="col">
-            <form method="post" action="/showtasks">
+            <form method="post" action="/showTasks">
                 <div id="taskTypeSwitcher" class="btn-group">
                     <button class="btn btn-success" name="taskType" value="TODAY">Today</button>
                     <button class="btn btn-success" name="taskType" value="TOMORROW">Tomorrow</button>
@@ -35,52 +36,51 @@
                 <tbody>
                 <tr>
                     <td><input type="checkbox" id="select-all" title="Select All"></td>
-                    <td colspan="2"></td>
+                    <td colspan="4"></td>
                 </tr>
                 <c:forEach var="task" items="${tasks}">
-                    <%--<div class="row task-row">--%>
-                        <%--<div class="col"></div>--%>
-                        <%--<div class="col"></div>--%>
-                        <%--<div class="col"></div>--%>
-                    <%--</div>--%>
                     <tr>
-                        <td>
+                        <td class="check-box-cell">
                             <input type="checkbox" name="checkedTask" value="${task.taskId}">
                         </td>
-                        <td><c:out value="${task.taskName}"/></td>
-                        <c:if test="${!sessionScope.get('taskType').matches('TODAY|TOMORROW')}">
-                            <td id="taskDate"><c:out value="${task.taskDate}"/></td>
+                        <td class="text-cell">
+                            <span><c:out value="${task.taskName}"/></span>
+                        </td>
+                        <c:if test="${sessionScope.get('taskType').matches('SOMEDAY')}">
+                            <td id="taskDate" class="text-cell">
+                                <span><c:out value="${task.taskDate}"/></span>
+                            </td>
                         </c:if>
                         <td>
                             <c:choose>
-                                <c:when test="${empty task.fileName}">
-                                    <form method="post" action="/uploadFile" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col">
-                                                <label class="custom-file">
-                                                    <input data-toggle="custom-file" data-target="#upload-file"
-                                                           type="file" name="file" class="custom-file-input">
-                                                    <span id="upload-file" class="custom-file-control custom-file-name"
-                                                          data-content="Choose file..."></span>
-                                                </label>
-                                            </div>
-                                            <div class="col">
-                                                <button class="btn btn-secondary" name="taskId" value="${task.taskId}">Upload File</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </c:when>
-                                <c:otherwise>
+                            <c:when test="${empty task.fileName}">
+                                <form method="post" action="/uploadFile" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col"><a href="/downloadFile?fileName=${task.fileName}">${task.fileName}</a></div>
                                         <div class="col">
-                                            <form method="post" action="/deleteFile">
-                                                <button class="btn btn-danger" name="taskId" value="${task.taskId}">Delete File</button>
-                                            </form>
+                                            <label class="custom-file">
+                                                <input data-toggle="custom-file" data-target="#upload-file-${task.taskId}"
+                                                       type="file" name="file" class="custom-file-input">
+                                                <span id="upload-file-${task.taskId}" class="custom-file-control custom-file-name"
+                                                      data-content="Choose file..."></span>
+                                            </label>
                                         </div>
-
+                                        <div class="col">
+                                            <button class="btn btn-secondary" name="taskId" value="${task.taskId}">Upload File</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="row">
+                                <div class="col"><span><a href="/downloadFile?fileName=${task.fileName}">${task.shortFileName}</a></span>
+                                </div>
+                                <div class="col">
+                                    <form method="post" action="/deleteFile">
+                                        <button class="btn btn-danger" name="fileName" value="${task.fileName}">Delete File</button>
+                                    </form>
+                                </div>
                                 </c:otherwise>
-                            </c:choose>
+                                </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
@@ -104,3 +104,6 @@
 </div>
 </body>
 </html>
+
+
+

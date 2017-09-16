@@ -1,5 +1,7 @@
 package by.gsu.epamlab.model.beans;
 
+import by.gsu.epamlab.controller.constants.Constants;
+
 import java.sql.Date;
 
 public class Task {
@@ -9,6 +11,7 @@ public class Task {
     private boolean isFixed;
     private boolean isBinned;
     private String fileName;
+    private String shortFileName;
 
     public Task() {
     }
@@ -70,7 +73,10 @@ public class Task {
         this.fileName = fileName;
     }
 
-    //todo eq and hash not null fields
+    public String getShortFileName() {
+        return fileName.substring(fileName.indexOf(Constants.FILE_NAME_DELIMITER) + 1);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

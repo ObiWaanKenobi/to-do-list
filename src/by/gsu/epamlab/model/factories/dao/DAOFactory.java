@@ -1,7 +1,9 @@
 package by.gsu.epamlab.model.factories.dao;
 
-import by.gsu.epamlab.model.dao.taskdao.ITaskDAO;
-import by.gsu.epamlab.model.dao.userdao.IUserDAO;
+import by.gsu.epamlab.model.constants.CommonConstants;
+import by.gsu.epamlab.model.dao.task.ITaskDAO;
+import by.gsu.epamlab.model.dao.user.IUserDAO;
+import by.gsu.epamlab.model.exceptions.FactoryException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,13 +13,17 @@ public abstract class DAOFactory {
     public abstract IUserDAO getUserDAO(Connection connection) throws SQLException;
     public abstract ITaskDAO getTaskDAO(Connection connection) throws SQLException;
 
-    //todo throw exc
-    public static DAOFactory getDAOFactory(String sourceType){
-        switch (sourceType.toUpperCase()){
+
+    public static DAOFactory getDAOFactory(String sourceType) throws FactoryException {
+        DAOFactory returnDAO = null;
+        switch (sourceType){
             case "MYSQL":
-                return new MySQLDAOFactory();
+                returnDAO = new MySQLDAOFactory();
+                break;
             default:
-                return null;
+                throw new FactoryException(CommonConstants.UNKNOWN_SOURCE);
         }
+
+        return returnDAO;
     }
 }

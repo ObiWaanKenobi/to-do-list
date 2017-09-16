@@ -1,14 +1,15 @@
 package by.gsu.epamlab.model.factories.dao;
 
-import by.gsu.epamlab.model.dao.taskdao.MySQLTaskDAO;
-import by.gsu.epamlab.model.dao.taskdao.ITaskDAO;
-import by.gsu.epamlab.model.dao.userdao.MySQLUserDAO;
-import by.gsu.epamlab.model.dao.userdao.IUserDAO;
+import by.gsu.epamlab.model.dao.task.MySQLTaskDAO;
+import by.gsu.epamlab.model.dao.task.ITaskDAO;
+import by.gsu.epamlab.model.dao.user.MySQLUserDAO;
+import by.gsu.epamlab.model.dao.user.IUserDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class MySQLDAOFactory extends DAOFactory {
+
     @Override
     public IUserDAO getUserDAO(Connection connection) throws SQLException {
         return new MySQLUserDAO(connection);
@@ -19,3 +20,4 @@ public class MySQLDAOFactory extends DAOFactory {
         return new MySQLTaskDAO(connection);
     }
 }
+
