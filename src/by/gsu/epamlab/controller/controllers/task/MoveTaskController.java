@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static by.gsu.epamlab.controller.constants.Constants.*;
 
-@WebServlet(name = "MoveTaskController", urlPatterns = "/moveTask")
+@WebServlet(name = "MoveTaskController", urlPatterns = "/movetask")
 public class MoveTaskController extends AbstractTaskController {
 
     @Override

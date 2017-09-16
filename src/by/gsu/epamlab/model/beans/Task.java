@@ -105,13 +105,16 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "taskId=" + taskId +
-                ", taskName='" + taskName + '\'' +
-                ", taskDate=" + taskDate +
-                ", isFixed=" + isFixed +
-                ", isBinned=" + isBinned +
-                ", fileName='" + fileName + '\'' +
+        String formattedFileName = (fileName == null)? null : ("\'" + fileName + "\'");
+        return "{" +
+                "taskId : " + taskId +
+                ", taskName : '" + taskName + '\'' +
+                ", taskDate : '" + taskDate + '\'' +
+                ", isFixed : " + isFixed +
+                ", isBinned : " + isBinned +
+                ", fileName : " + formattedFileName  +
                 '}';
     }
+
+
 }

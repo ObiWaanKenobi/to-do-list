@@ -19,7 +19,7 @@
                     <label for="passwordField">Password:</label>
                     <input type="password" name="password" placeholder="Password" id="passwordField" class="form-control">
                 </div>
-                <input type="submit" value="Log In">
+                <button class="btn btn-success">Log In</button>
             </form>
         </div>
     </div>

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import static by.gsu.epamlab.controller.constants.Constants.*;
 
-@WebServlet(name = "RegistrationController", urlPatterns = "/registrate")
+@WebServlet(name = "RegistrationController", urlPatterns = "/register")
 public class RegistrationController extends AbstractUserController {
     @Override
     protected void performTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

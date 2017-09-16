@@ -10,7 +10,7 @@
     <c:import url="error.jsp" />
     <div class="row">
         <div class="col-sm-4">
-            <form action="/registrate" method="post">
+            <form action="/register" method="post">
                 <div class="form-group">
                     <label for="loginField">Login:</label>
                     <input name="login" placeholder="Login" id="loginField" class="form-control">
@@ -23,7 +23,7 @@
                     <label for="passConfField">Confirm your password:</label>
                     <input type="password" name="confirmPassword" placeholder="Repeat password" id="passConfField" class="form-control">
                 </div>
-                <input type="submit" value="Sign Up">
+                <button class="btn btn-success">Sign Up</button>
             </form>
         </div>
     </div>

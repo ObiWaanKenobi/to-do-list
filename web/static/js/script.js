@@ -26,56 +26,62 @@ function setDate(taskType) {
     document.getElementById('taskDate').setAttribute('value', date);
 }
 
-function moveTask(moveType) {
+function updateTasks(action, additionalParams='') {
+    let $checkedTasks = $('input[name=checkedTask]:checked');
+    let queryParams = getCheckedTasksString($checkedTasks);
+
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        if (xhr.readyState != 4) {
+        if (xhr.readyState !== 4) {
             return;
         }
-        if (xhr.status != 200) {
+        if (xhr.status === 200) {
+            _.each($checkedTasks, ($task) => $task.parentNode.parentNode.remove());
+        } else {
             alert(xhr.status + ': ' + xhr.statusText);
-        }
-        else {
-            elems.forEach((elem) => elem.parentNode.parentNode.remove());
-        }
-
+    }
     };
-    let elems = document.querySelectorAll('input[name=checkedTask]:checked');
-    let queryParams = getCheckedTasksString(elems);
 
-
-    let taskAction = `&moveType=${moveType}`;
-    xhr.open('POST', `/moveTask?${queryParams}${taskAction}`, true);
+    xhr.open('POST', `/${action}?${queryParams}&${additionalParams}`, true);
     xhr.send();
 }
 
-function deleteTask() {
+function loadTasks(taskType) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        if (xhr.readyState != 4) {
+        if (xhr.readyState !== 4) {
             return;
         }
-        if (xhr.status != 200) {
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            //get object from json
+            showTasks(tasks, taskType);
+        } else {
             alert(xhr.status + ': ' + xhr.statusText);
         }
-        else {
-            elems.forEach((elem) => elem.parentNode.parentNode.remove());
-        }
-
     };
-    let elems = document.querySelectorAll('input[name=checkedTask]:checked');
-    let queryParams = getCheckedTasksString(elems);
-
-    xhr.open('POST', `/deleteTask?${queryParams}`, true);
+    xhr.open('POST', `/showtasks?taskType=${taskType}`, true);
     xhr.send();
 }
 
-function getCheckedTasksString(elems) {
+function showTasks(tasks, taskType){
+    //clear table
+    _.each(tasks, (task) => {
+        taskRow = getTaskRow(task, taskType);
+        // table add row
+    })
+}
+
+function getTaskRow(task, taskType) {
+    return '<tr></tr>'
+}
+
+function getCheckedTasksString($tasks) {
     let queryArray = [];
-    elems.forEach((elem) => queryArray.push(`${elem.name}=${elem.value}`));
+    _.each($tasks, ($task) => queryArray.push(`${$task.name}=${$task.value}`));
+    // let queryArray = _.map($tasks, ($task) => `${$task.name}=${$task.value}`);
     return queryArray.join('&');
 }
-
 
 //set active to the chosen taskType
 $(document).ready(function () {
@@ -83,9 +89,9 @@ $(document).ready(function () {
         document.querySelector(`#taskTypeSwitcher button[value='${taskType}']`).classList.add('active')
     }
 
-    let $taskType = document.querySelector('#currentTaskType');
-    if ($taskType){
-        setActive($taskType.value)
+    let taskType = document.getElementById('currentTaskType');
+    if (taskType){
+        setActive(taskType.value)
     }
 
 });
@@ -93,9 +99,8 @@ $(document).ready(function () {
 $('body')
     .on('change', '#select-all', function () {
         const isChecked = this.checked;
-        $('input[name=checkedTask]').each(function () {
-            this.checked = isChecked;
-        });
+        $elems = $('input[name=checkedTask]');
+        _.each($elems, ($elem) => $elem.checked = isChecked)
     })
     .on('change', 'input[type="file"][data-toggle="custom-file"]', function () {
         const $input = $(this);

@@ -39,7 +39,7 @@ public class Constants {
     //pages
     public static final String LOGIN_PAGE = "/jsp/login.jsp";
     public static final String ADDTASK_PAGE = "/jsp/addTask.jsp";
-    public static final String REGISTRATION_PAGE = "/jsp/registrate.jsp";
+    public static final String REGISTRATION_PAGE = "/jsp/register.jsp";
     public static final String TASKS_PAGE = "/jsp/tasks.jsp";
     public static final String INDEX_PAGE = "/index.jsp";
 }

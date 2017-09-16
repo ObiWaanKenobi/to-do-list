@@ -16,17 +16,16 @@
         </div>
     </div>
 
+
     <div class="row section-row">
         <div class="col">
-            <form method="post" action="/showTasks">
-                <div id="taskTypeSwitcher" class="btn-group">
-                    <button class="btn btn-success" name="taskType" value="TODAY">Today</button>
-                    <button class="btn btn-success" name="taskType" value="TOMORROW">Tomorrow</button>
-                    <button class="btn btn-success" name="taskType" value="SOMEDAY">Someday</button>
-                    <button class="btn btn-success" name="taskType" value="FIXED">Fixed</button>
-                    <button class="btn btn-success" name="taskType" value="RECYCLE_BIN">Recycle Bin</button>
-                </div>
-            </form>
+            <div id="taskTypeSwitcher" class="btn-group">
+                <button class="btn btn-success" onclick="loadTasks('TODAY')">Today</button>
+                <button class="btn btn-success" onclick="loadTasks('TOMORROW')">Tomorrow</button>
+                <button class="btn btn-success" onclick="loadTasks('SOMEDAY')">Someday</button>
+                <button class="btn btn-success" onclick="loadTasks('FIXED')">Fixed</button>
+                <button class="btn btn-success" onclick="loadTasks('RECYCLE_BIN')">Recycle Bin</button>
+            </div>
         </div>
     </div>
 
@@ -35,8 +34,12 @@
             <table id="tasksTable" class="table table-striped">
                 <tbody>
                 <tr>
-                    <td><input type="checkbox" id="select-all" title="Select All"></td>
-                    <td colspan="4"></td>
+                    <th><input type="checkbox" id="select-all" title="Select All"></th>
+                    <th>Task Name</th>
+                    <c:if test="${sessionScope.get('taskType').matches('SOMEDAY')}">
+                        <th>Task Date</th>
+                    </c:if>
+                    <th colspan="2">Task File</th>
                 </tr>
                 <c:forEach var="task" items="${tasks}">
                     <tr>
@@ -58,9 +61,11 @@
                                     <div class="row">
                                         <div class="col">
                                             <label class="custom-file">
-                                                <input data-toggle="custom-file" data-target="#upload-file-${task.taskId}"
+                                                <input data-toggle="custom-file"
+                                                       data-target="#upload-file-${task.taskId}"
                                                        type="file" name="file" class="custom-file-input">
-                                                <span id="upload-file-${task.taskId}" class="custom-file-control custom-file-name"
+                                                <span id="upload-file-${task.taskId}"
+                                                      class="custom-file-control custom-file-name"
                                                       data-content="Choose file..."></span>
                                             </label>
                                         </div>
@@ -72,11 +77,14 @@
                             </c:when>
                             <c:otherwise>
                             <div class="row">
-                                <div class="col"><span><a href="/downloadFile?fileName=${task.fileName}">${task.shortFileName}</a></span>
+                                <div class="col"><span><a
+                                        href="/downloadFile?fileName=${task.fileName}">${task.shortFileName}</a></span>
                                 </div>
                                 <div class="col">
                                     <form method="post" action="/deleteFile">
-                                        <button class="btn btn-danger" name="fileName" value="${task.fileName}">Delete File</button>
+                                        <button class="btn btn-danger" name="fileName" value="${task.fileName}">Delete
+                                            File
+                                        </button>
                                     </form>
                                 </div>
                                 </c:otherwise>
