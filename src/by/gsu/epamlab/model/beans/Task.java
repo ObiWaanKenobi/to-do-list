@@ -13,6 +13,7 @@ public class Task {
     private String fileName;
     private String shortFileName;
 
+
     public Task() {
     }
 
@@ -23,6 +24,9 @@ public class Task {
         this.isFixed = isFixed;
         this.isBinned = isBinned;
         this.fileName = fileName;
+        this.shortFileName = fileName == null
+                ? ""
+                : fileName.substring(fileName.indexOf(Constants.FILE_NAME_DELIMITER) + 1);
     }
 
     public int getTaskId() {
@@ -73,10 +77,6 @@ public class Task {
         this.fileName = fileName;
     }
 
-    public String getShortFileName() {
-        return fileName.substring(fileName.indexOf(Constants.FILE_NAME_DELIMITER) + 1);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,18 +103,21 @@ public class Task {
         return result;
     }
 
-    @Override
-    public String toString() {
-        String formattedFileName = (fileName == null)? null : ("\'" + fileName + "\'");
-        return "{" +
-                "taskId : " + taskId +
-                ", taskName : '" + taskName + '\'' +
-                ", taskDate : '" + taskDate + '\'' +
-                ", isFixed : " + isFixed +
-                ", isBinned : " + isBinned +
-                ", fileName : " + formattedFileName  +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        String formattedFileName = (fileName == null)? "" : fileName;
+//        String formShortTaskName = (taskName == null) ? "" : getShortFileName();
+//
+//        return "{" +
+//                "taskId1 : " + taskId +
+//                ", taskName : '" + taskName + "'" +
+//                ", taskDate : '" + taskDate + "'" +
+//                ", isFixed : " + isFixed +
+//                ", isBinned : " + isBinned +
+//                ", fileName : '" + formattedFileName + "'"  +
+//                ", shortFileName : '" + formShortTaskName + "'" +
+//                '}';
+//    }
 
 
 }
