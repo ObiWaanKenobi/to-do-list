@@ -19,20 +19,16 @@ import static by.gsu.epamlab.controller.constants.Constants.*;
 public class ShowTasksController extends AbstractTaskController {
     @Override
     protected void performTask(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String taskType = request.getParameter(TASK_TYPE);
         String userId = String.valueOf(session.getAttribute(USER_ID));
 
         if (taskType != null) {
             try {
-                List<Task> tasks;
-                tasks = iTaskService.getTasks(taskType, userId);
-                String sTasks = new Gson().toJson(tasks);
+                List<Task> taskList = iTaskService.getTasks(taskType, userId);
                 session.setAttribute(TASK_TYPE, taskType);
-                out.write(sTasks);
+                session.setAttribute(TASKS, taskList);
+                jumpForward(TASKS_PAGE, request, response);
             } catch (TaskDaoException e) {
                 jumpError(TASKS_PAGE, e.getMessage(), request, response);
             }

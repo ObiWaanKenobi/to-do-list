@@ -1,3 +1,5 @@
+let currentTaskType;
+
 function today() {
     return moment().format('YYYY-MM-DD');
 }
@@ -26,6 +28,8 @@ function setDate(taskType) {
     document.getElementById('taskDate').setAttribute('value', date);
 }
 
+
+//moveTasks function
 function updateTasks(action, additionalParams='') {
     let $checkedTasks = $('input[name=checkedTask]:checked');
     let queryParams = getCheckedTasksString($checkedTasks);
@@ -46,16 +50,19 @@ function updateTasks(action, additionalParams='') {
     xhr.send();
 }
 
+
+
 function loadTasks(taskType) {
+    currentTaskType = taskType;
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState !== 4) {
             return;
         }
         if (xhr.status === 200) {
-            console.log(xhr.responseText);
-            //get object from json
+            //console.log(xhr.responseText);
             showTasks(tasks, taskType);
+            showTaskActions(taskType)
         } else {
             alert(xhr.status + ': ' + xhr.statusText);
         }
@@ -76,6 +83,10 @@ function getTaskRow(task, taskType) {
     return '<tr></tr>'
 }
 
+function showTaskActions(taskType) {
+
+}
+
 function getCheckedTasksString($tasks) {
     let queryArray = [];
     _.each($tasks, ($task) => queryArray.push(`${$task.name}=${$task.value}`));
@@ -88,7 +99,6 @@ $(document).ready(function () {
     function setActive(taskType) {
         document.querySelector(`#taskTypeSwitcher button[value='${taskType}']`).classList.add('active')
     }
-
     let taskType = document.getElementById('currentTaskType');
     if (taskType){
         setActive(taskType.value)
@@ -99,8 +109,8 @@ $(document).ready(function () {
 $('body')
     .on('change', '#select-all', function () {
         const isChecked = this.checked;
-        $elems = $('input[name=checkedTask]');
-        _.each($elems, ($elem) => $elem.checked = isChecked)
+        const $elems = $('input[name=checkedTask]');
+        _.each($elems, ($elem) => {$elem.checked = isChecked});
     })
     .on('change', 'input[type="file"][data-toggle="custom-file"]', function () {
         const $input = $(this);

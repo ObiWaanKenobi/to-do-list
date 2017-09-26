@@ -22,6 +22,7 @@ public class AddTaskController extends AbstractTaskController {
         String taskName = request.getParameter(TASK_NAME);
         String taskDate = request.getParameter(TASK_DATE);
         String taskType = String.valueOf(session.getAttribute(TASK_TYPE));
+        System.out.println(taskType);
         String userId = String.valueOf(session.getAttribute(USER_ID));
 
         try {

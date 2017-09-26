@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        function makeCounter() {
+            var currentCount = 1;
+
+            return function() { // (**)
+                return currentCount++;
+            };
+        }
+
+        var counter = makeCounter(); // (*)
+
+        // каждый вызов увеличивает счётчик и возвращает результат
+        alert( counter() ); // 1
+        alert( counter() ); // 2
+        alert( counter() ); // 3
+
+        // создать другой счётчик, он будет независим от первого
+        var counter2 = makeCounter();
+        alert( counter2() ); // 1
+    </script>
 </head>
 <body>
-<form>
+<input type="hidden" name="nm" value=>
 
-</form>
 
 </body>
 </html>

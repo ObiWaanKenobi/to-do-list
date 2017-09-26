@@ -23,7 +23,6 @@ public abstract class DAOFactory {
             default:
                 throw new FactoryException(CommonConstants.UNKNOWN_SOURCE);
         }
-
         return returnDAO;
     }
 }

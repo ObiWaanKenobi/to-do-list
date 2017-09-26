@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <input type="hidden" id="currentTaskType" value="${sessionScope.get('taskType')}">
+    <input type="hidden" id="currentTaskType" value="${sessionScope.get("taskType")}">
 
     <div class="row section-row">
         <div class="col">
@@ -19,13 +19,15 @@
 
     <div class="row section-row">
         <div class="col">
-            <div id="taskTypeSwitcher" class="btn-group">
-                <button class="btn btn-success" onclick="loadTasks('TODAY')">Today</button>
-                <button class="btn btn-success" onclick="loadTasks('TOMORROW')">Tomorrow</button>
-                <button class="btn btn-success" onclick="loadTasks('SOMEDAY')">Someday</button>
-                <button class="btn btn-success" onclick="loadTasks('FIXED')">Fixed</button>
-                <button class="btn btn-success" onclick="loadTasks('RECYCLE_BIN')">Recycle Bin</button>
-            </div>
+            <form method="post" action="/showtasks">
+                <div id="taskTypeSwitcher" class="btn-group">
+                    <button class="btn btn-success" name="taskType" value="TODAY">Today</button>
+                    <button class="btn btn-success" name="taskType" value="TOMORROW">Tomorrow</button>
+                    <button class="btn btn-success" name="taskType" value="SOMEDAY">Someday</button>
+                    <button class="btn btn-success" name="taskType" value="FIXED">Fixed</button>
+                    <button class="btn btn-success" name="taskType" value="RECYCLE_BIN">Recycle Bin</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -76,19 +78,20 @@
                                 </form>
                             </c:when>
                             <c:otherwise>
-                            <div class="row">
-                                <div class="col"><span><a
-                                        href="/downloadFile?fileName=${task.fileName}">${task.shortFileName}</a></span>
+                                <div class="row">
+                                    <div class="col"><span><a
+                                            href="/downloadFile?fileName=${task.fileName}">${task.shortFileName}</a></span>
+                                    </div>
+                                    <div class="col">
+                                        <form method="post" action="/deleteFile">
+                                            <button class="btn btn-danger" name="fileName" value="${task.fileName}">Delete
+                                                File
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <form method="post" action="/deleteFile">
-                                        <button class="btn btn-danger" name="fileName" value="${task.fileName}">Delete
-                                            File
-                                        </button>
-                                    </form>
-                                </div>
-                                </c:otherwise>
-                                </c:choose>
+                            </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
